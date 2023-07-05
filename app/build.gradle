@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'com.google.dagger.hilt.android'
 }
 
 android {
@@ -64,15 +66,21 @@ dependencies {
     androidTestImplementation 'androidx.compose.ui:ui-test-junit4'
     debugImplementation 'androidx.compose.ui:ui-tooling'
     debugImplementation 'androidx.compose.ui:ui-test-manifest'
+    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1"
 
     def voyagerVersion = "1.0.0-rc05"
     // Navigator
     implementation("cafe.adriel.voyager:voyager-navigator:$voyagerVersion")
-    // TabNavigator
-    implementation("cafe.adriel.voyager:voyager-tab-navigator:$voyagerVersion")
-    // Android ViewModel integration
     implementation("cafe.adriel.voyager:voyager-androidx:$voyagerVersion")
-
+    implementation("cafe.adriel.voyager:voyager-tab-navigator:$voyagerVersion")
     implementation("cafe.adriel.voyager:voyager-bottom-sheet-navigator:$voyagerVersion")
+    implementation("cafe.adriel.voyager:voyager-hilt:$voyagerVersion")
 
+    implementation "com.google.dagger:hilt-android:2.44"
+    kapt "com.google.dagger:hilt-compiler:2.44"
+}
+
+// Allow references to generated code
+kapt {
+    correctErrorTypes true
 }
